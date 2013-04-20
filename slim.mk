@@ -16,13 +16,30 @@
 
 TARGET_BOOTANIMATION_NAME := 480
 
-$(call inherit-product-if-exists, vendor/cm/config/common_full_phone.mk)
-$(call inherit-product-if-exists, vendor/cm/config/gsm.mk)
+$(call inherit-product-if-exists, vendor/slim/config/common_full_phone.mk)
+$(call inherit-product-if-exists, vendor/slim/config/gsm.mk)
 $(call inherit-product, device/moto/mb526/full_jordan.mk)
 
 DEVICE_PACKAGE_OVERLAYS += device/moto/mb526/overlay
 
-PRODUCT_NAME := cm_mb526
+#Goo.im
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.goo.developerid=Kayant \
+    ro.goo.version=$(DATE) \
+    ro.slim.version=$(SLIM_VERSION) \
+    ro.modversion=$(SLIM_MOD_VERSION)
+
+# Inherit device settings
+$(call inherit-product, vendor/slim/config/common_defy.mk)
+
+# Inherit torch settings
+$(call inherit-product, vendor/slim/config/common_ledflash.mk)
+
+#Boot Animation
+PRODUCT_COPY_FILES += \
+    vendor/slim/prebuilt/hdpi/bootanimation.zip:system/media/bootanimation.zip
+
+PRODUCT_NAME := slim_mb526
 PRODUCT_BRAND := MOTO
 PRODUCT_DEVICE := mb526
 PRODUCT_MODEL := MB526
