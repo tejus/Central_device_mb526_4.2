@@ -14,4 +14,9 @@
         "target_path": "device/moto/mb526",
         "branch": "SB-4.2"
     },
+    {
+        "repository": "Quarx2k/proprietary_vendor_motorola",
+        "target_path": "vendor/motorola",
+        "branch": "jellybean"
+    }
 ]
