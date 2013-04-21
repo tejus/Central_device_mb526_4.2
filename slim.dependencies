@@ -1,10 +1,5 @@
 [
     {
-        "repository": "Kayant/Central_device_common_4.2",
-        "target_path": "device/moto/jordan-common",
-        "branch": "SB-4.2-2.6"
-    },
-    {
         "repository": "Quarx2k/jordan-kernel",
         "target_path": "jordan-kernel",
         "branch": "jb_clean-2.6.32-9"
