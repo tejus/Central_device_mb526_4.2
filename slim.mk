@@ -39,18 +39,19 @@ $(call inherit-product, vendor/slim/config/common_ledflash.mk)
 PRODUCT_COPY_FILES += \
     vendor/slim/prebuilt/hdpi/bootanimation.zip:system/media/bootanimation.zip
 
+# Release name and versioning
+PRODUCT_RELEASE_NAME := Defy+
+
+UTC_DATE := $(shell date +%s)
+DATE     := $(shell date +%Y%m%d)
+
+## Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := mb526
 PRODUCT_NAME := slim_mb526
 PRODUCT_BRAND := MOTO
 PRODUCT_MODEL := MB526
 PRODUCT_MANUFACTURER := Motorola
 PRODUCT_SFX := DFP
-
-# Release name and versioning
-PRODUCT_RELEASE_NAME := Defy+
-
-UTC_DATE := $(shell date +%s)
-DATE     := $(shell date +%Y%m%d)
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
     PRODUCT_NAME=${PRODUCT_MODEL}_${PRODUCT_SFX} \
