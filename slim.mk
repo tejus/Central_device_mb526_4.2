@@ -39,9 +39,9 @@ $(call inherit-product, vendor/slim/config/common_ledflash.mk)
 PRODUCT_COPY_FILES += \
     vendor/slim/prebuilt/hdpi/bootanimation.zip:system/media/bootanimation.zip
 
+PRODUCT_DEVICE := mb526
 PRODUCT_NAME := slim_mb526
 PRODUCT_BRAND := MOTO
-PRODUCT_DEVICE := mb526
 PRODUCT_MODEL := MB526
 PRODUCT_MANUFACTURER := Motorola
 PRODUCT_SFX := DFP
