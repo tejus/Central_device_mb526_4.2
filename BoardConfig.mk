@@ -30,5 +30,5 @@ TARGET_USE_JORDAN_COMMON := true
 TARGET_KERNEL_CONFIG  := mb526_cm10.1_defconfig
 
 # Use the part that is common between all allwinner
-include device/moto/jordan-common/BoardConfig.mk
+include device/motorola/jordan-common/BoardConfig.mk
 
