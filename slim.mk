@@ -26,8 +26,6 @@ DEVICE_PACKAGE_OVERLAYS += device/motorola/mb526/overlay
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.goo.developerid=Kayant \
     ro.goo.version=$(DATE) \
-    ro.slim.version=$(SLIM_VERSION) \
-    ro.modversion=$(SLIM_MOD_VERSION)
 
 # Inherit device settings
 $(call inherit-product, vendor/slim/config/common_defy.mk)
@@ -38,12 +36,6 @@ $(call inherit-product, vendor/slim/config/common_ledflash.mk)
 #Boot Animation
 PRODUCT_COPY_FILES += \
     vendor/slim/prebuilt/hdpi/bootanimation.zip:system/media/bootanimation.zip
-
-# Release name and versioning
-PRODUCT_RELEASE_NAME := Defy+
-
-UTC_DATE := $(shell date +%s)
-DATE     := $(shell date +%Y%m%d)
 
 ## Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := mb526
