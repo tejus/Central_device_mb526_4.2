@@ -85,3 +85,11 @@ persist.sys.multitouch=2
 persist.service.adb.enable=1
 #=========================================================================================
 
+
+# hardware info
+ro.device.chipset=TI OMAP 3630
+ro.device.cpu=1 GHz Cortex-A8 single-core
+ro.device.gpu=PowerVR SGX530
+ro.device.rear_cam=5 MP
+ro.device.front_cam=N/A
+ro.device.screen_res=480x854

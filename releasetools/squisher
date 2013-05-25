@@ -4,8 +4,6 @@
 # cyanogen
 #
 
-. $ANDROID_BUILD_TOP/vendor/cm/tools/functions
-
 OUT_TARGET_HOST=`uname -a | grep Darwin`
 if [ -z "$OUT_TARGET_HOST" ]
 then
@@ -21,18 +19,22 @@ else
 fi
 
 if [ -z "$OUT" -o ! -d "$OUT" ]; then
-	echo -e $CL_RED"ERROR: $0 only works with a full build environment. $OUT should exist."$CL_RST
+	echo "ERROR: $0 only works with a full build environment. $OUT should exist."$CL_RST
 	exit 1
 fi
 
 if [ ! -f "$OTAPACKAGE" ]; then
-	echo -e $CL_RED"$OTAPACKAGE doesn't exist!"$CL_RST;
+	echo "$OTAPACKAGE doesn't exist!"$CL_RST;
 	exit 1
 fi
 
-OPTICHARGER=$ANDROID_BUILD_TOP/vendor/cm/tools/opticharger
+OPTICHARGER=$ANDROID_BUILD_TOP/vendor/slim/tools/opticharger
 QUIET=-q
 DELETE_BINS="applypatch applypatch_static check_prereq recovery updater"
+DELETE_MEDIA="*.qmg"
+DELETE_APKS="Home.apk LiveWallpapers.apk VoiceDialer.apk SoundRecorder.apk VisualizationWallpapers.apk "
+DELETE_GALLERY="Gallery2.apk"
+DELETE_FONTS="MTLmr3m.ttf"
 
 REPACK=$OUT/repack.d
 printf "Sanitizing environment..."
@@ -79,6 +81,24 @@ $SED -i \
 # Delete unnecessary binaries
 ( cd $REPACK/ota/system/bin; echo $DELETE_BINS | xargs rm -f; )
 
+# Delete Home Apk
+( cd $REPACK/ota/system/app; echo $DELETE_APKS | xargs rm -f; )
+
+# Delete Unnecessary Fonts
+( cd $REPACK/ota/system/fonts; echo $DELETE_FONTS | xargs rm -f; )
+
+# Delete compiled fonts
+#rm -rf $REPACK/ota/system/fonts
+
+#make dir for fonts again
+#mkdir $REPACK/ota/system/fonts
+
+# Add precompiled fonts
+#mv -f $REPACK/ota/system/sfont/*.ttf $REPACK/ota/system/fonts/
+
+# No need for tts
+rm -rf $REPACK/ota/system/tts
+
 # No need for recovery
 rm -rf $REPACK/ota/recovery
 
@@ -95,10 +115,20 @@ rm -f $REPACK/ota/system/etc/init.d/04modules
 [ -d $REPACK/ota/system/lib/modules ] && \
 	find $REPACK/ota/system/lib/modules -name "*.ko" -print0 | xargs -0 arm-eabi-strip --strip-unneeded
 
+# Fix LCD Density for slim
+DEVICELCD=`sed -n -e'/ro\.sf\.lcd_density/s/^.*=//p' $OUT/system/build.prop`
+if [ "$DEVICELCD" = "240" ]; then
+sed -i 's/ro.sf.lcd_density=240/ro.sf.lcd_density=182/g' $OUT/system/build.prop
+elif [ "$DEVICELCD" = "320" ]; then
+sed -i 's/ro.sf.lcd_density=320/ro.sf.lcd_density=241/g' $OUT/system/build.prop
+elif [ "$DEVICELCD" = "213" ]; then
+sed -i 's/ro.sf.lcd_density=213/ro.sf.lcd_density=182/g' $OUT/system/build.prop
+fi
+
 # Determine what to name the new signed package
-MODVERSION=`sed -n -e'/ro\.cm\.version/s/^.*=//p' $REPACK/ota/system/build.prop`
-OUTFILE=$OUT/cm-$MODVERSION.zip
-echo -e $CL_CYN"MODVERSION: $MODVERSION"$CL_RST
+MODVERSION=`sed -n -e'/ro\.modversion/s/^.*=//p' $REPACK/ota/system/build.prop`
+OUTFILE=$OUT/$MODVERSION.zip
+echo MODVERSION: $MODVERSION
 
 # Pack it up and sign
 printf "Zipping package..."
@@ -121,7 +151,7 @@ img=`basename $OUTFILE`
 cd `dirname $OUTFILE`
 $MD5 $img >$img.md5sum
 echo
-echo -e $CL_GRN"Package complete: $OUTFILE"$CL_RST
+echo "Package complete: $OUTFILE"$CL_RST
 cat $img.md5sum
 echo
 )
