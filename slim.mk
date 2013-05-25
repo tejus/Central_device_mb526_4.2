@@ -30,8 +30,8 @@ PRODUCT_PACKAGES += \
   Mms
 
 # Apollo
-PRODUCT_PACKAGES += \
-  Apollo
+#PRODUCT_PACKAGES += \
+ #Apollo
 
 PRODUCT_COPY_FILES += \
     vendor/slim/prebuilt/hdpi/bootanimation.zip:system/media/bootanimation.zip
