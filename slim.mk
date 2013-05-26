@@ -4,9 +4,6 @@ $(call inherit-product, vendor/slim/config/gsm.mk)
 # Boot animation
 TARGET_BOOTANIMATION_NAME := 480
 
-# Release name
-PRODUCT_RELEASE_NAME := mb526
-
 # Inherit some common slim stuff.
 $(call inherit-product, vendor/slim/config/common_full_phone.mk)
 
@@ -48,7 +45,7 @@ PRODUCT_BRAND := motorola
 PRODUCT_DEVICE := mb526
 PRODUCT_MODEL := MB526
 PRODUCT_MANUFACTURER := MOTO
-PRODUCT_RELEASE_NAME := Motorola Defy+
+PRODUCT_RELEASE_NAME := Defy(+)
 PRODUCT_SFX := umts
 
 UTC_DATE := $(shell date +%s)
