@@ -28,9 +28,13 @@ PRODUCT_PACKAGES += \
 
 # Dsp
 PRODUCT_PACKAGES += \
-    audio_effects.conf \
-    DSPManager \
-    libcyanogen-dsp \
+  audio_effects.conf \
+  DSPManager \
+  libcyanogen-dsp \
+
+#Apollo
+PRODUCT_PACKAGES += \
+  Apollo
 
 PRODUCT_COPY_FILES += \
     vendor/slim/prebuilt/hdpi/bootanimation.zip:system/media/bootanimation.zip
