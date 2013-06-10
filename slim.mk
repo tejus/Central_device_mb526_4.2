@@ -38,7 +38,7 @@ PRODUCT_COPY_FILES += \
     vendor/slim/prebuilt/hdpi/bootanimation.zip:system/media/bootanimation.zip
 
 ## Device identifier. This must come after all inclusions
-PRODUCT_NAME := cm_mb526
+PRODUCT_NAME := slim_mb526
 PRODUCT_BRAND := motorola
 PRODUCT_DEVICE := mb526
 PRODUCT_MODEL := MB526
