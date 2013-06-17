@@ -33,6 +33,14 @@ $(call inherit-product, vendor/slim/config/common_defy.mk)
 # Inherit torch settings
 $(call inherit-product, vendor/slim/config/common_ledflash.mk)
 
+# Mms
+PRODUCT_PACKAGES += \
+  Mms
+
+# Apollo
+PRODUCT_PACKAGES += \
+  Apollo
+
 #Boot Animation
 PRODUCT_COPY_FILES += \
     vendor/slim/prebuilt/hdpi/bootanimation.zip:system/media/bootanimation.zip
