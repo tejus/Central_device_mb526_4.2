@@ -14,32 +14,17 @@
 # limitations under the License.
 #
 
-TARGET_BOOTANIMATION_NAME := 480
-
-$(call inherit-product-if-exists, vendor/slim/config/common_full_phone.mk)
-$(call inherit-product-if-exists, vendor/slim/config/gsm.mk)
+$(call inherit-product, vendor/slim/config/gsm.mk)
+$(call inherit-product, vendor/slim/config/common_full_phone.mk)
 $(call inherit-product, device/moto/mb526/full_jordan.mk)
-
-DEVICE_PACKAGE_OVERLAYS += device/moto/mb526/overlay
-
-#Goo.im
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.goo.developerid=Kayant \
-    ro.goo.version=$(DATE) \
-
-# Inherit device settings
-$(call inherit-product, vendor/slim/config/common_defy.mk)
 
 # Inherit torch settings
 $(call inherit-product, vendor/slim/config/common_ledflash.mk)
 
-# Mms
-PRODUCT_PACKAGES += \
-  Mms
+# Inherit device settings
+$(call inherit-product, vendor/slim/config/common_defy.mk)
 
-# Apollo
-PRODUCT_PACKAGES += \
-  Apollo
+DEVICE_PACKAGE_OVERLAYS += device/moto/mb526/overlay
 
 #Boot Animation
 PRODUCT_COPY_FILES += \
