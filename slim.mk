@@ -15,6 +15,10 @@
 #
 
 $(call inherit-product, vendor/slim/config/gsm.mk)
+
+# Inherit from the common Open Source product configuration
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+
 $(call inherit-product, vendor/slim/config/common_full_phone.mk)
 $(call inherit-product, device/moto/mb526/full_jordan.mk)
 
