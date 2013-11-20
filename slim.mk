@@ -14,15 +14,27 @@
 # limitations under the License.
 #
 
-TARGET_BOOTANIMATION_NAME := 480
+$(call inherit-product, vendor/slim/config/gsm.mk)
 
-$(call inherit-product-if-exists, vendor/cm/config/common_full_phone.mk)
-$(call inherit-product-if-exists, vendor/cm/config/gsm.mk)
+# Boot animation
+TARGET_SCREEN_HEIGHT := 854
+TARGET_SCREEN_WIDTH := 480
+
+# Inherit from the common Open Source product configuration
+$(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
+
+$(call inherit-product, vendor/slim/config/common_full_phone.mk)
 $(call inherit-product, device/moto/mb526/full_jordan.mk)
+
+# Inherit torch settings
+$(call inherit-product, vendor/slim/config/common_ledflash.mk)
+
+# Inherit device settings
+$(call inherit-product, vendor/slim/config/common_defy.mk)
 
 DEVICE_PACKAGE_OVERLAYS += device/moto/mb526/overlay
 
-PRODUCT_NAME := cm_mb526
+PRODUCT_NAME := slim_mb526
 PRODUCT_BRAND := motorola
 PRODUCT_DEVICE := mb526
 PRODUCT_MODEL := MB526
