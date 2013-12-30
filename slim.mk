@@ -26,9 +26,6 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, vendor/slim/config/common_full_phone.mk)
 $(call inherit-product, device/moto/mb526/full_jordan.mk)
 
-# Inherit torch settings
-$(call inherit-product, vendor/slim/config/common_ledflash.mk)
-
 # Inherit device settings
 $(call inherit-product, vendor/slim/config/common_defy.mk)
 
